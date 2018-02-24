@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+   /* private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
               = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -40,6 +40,5 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
+    }*/
 }
