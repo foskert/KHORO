@@ -12,12 +12,17 @@
         <activity
             android:name=".ACTIVITY.AT_LOGIN"
             android:label="@string/title_activity_at__lista__comentarios">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ACTIVITY.AT_LISTA_COMENTARIOS"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
-    <activity
-        android:name=".ACTIVITY.AT_LISTA_COMENTARIOS"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme.NoActionBar">
-    </activity>
+
 
 </manifest>
