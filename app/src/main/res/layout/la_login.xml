@@ -1,7 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
+              android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.65"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <ImageView
+            android:id="@+id/img_logo_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logokhoroblanco"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.35"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <TextView
+            android:id="@+id/text_user_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Name or Email"
+            android:textColor="@color/colorBlanco"/>
+
+        <EditText
+            android:id="@+id/edit_usuario_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:drawableLeft="@drawable/icouser"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorBlanco"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/text_clave_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="@color/colorBlanco"/>
+
+        <EditText
+            android:id="@+id/edit_clave_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:drawableLeft="@drawable/icokey"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorBlanco"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBox_recuerdo_clave_login"
+                style="@android:style/Widget.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:checked="true"
+                android:text="Remember Me"
+                android:textColor="@color/colorBlanco"
+                android:textColorLink="@color/colorBlanco"/>
+
+            <TextView
+                android:id="@+id/text_cambio_clave_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Forgot Password?"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlanco"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_iniciar_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorBlanco"
+            android:text="SIGN IN"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_facebook_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorFacebook"
+            android:drawableLeft="@drawable/icofacebook"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Login with Facebook"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlanco"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/text_footer_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:paddingBottom="5dp"
+            android:text="Not a member yet? Sign Up"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlanco"/>
+
+    </LinearLayout>
 </LinearLayout>
