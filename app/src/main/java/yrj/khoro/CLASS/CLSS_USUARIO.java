@@ -38,13 +38,13 @@ public class CLSS_USUARIO {
     }
     public CLSS_USUARIO(Context context) { this.context=context;   preferencias(); }
     public String getUsername() {
-        return username;
+        return pref.getString(KEY_LOGIN, username);
     }
     public void setUsername(String username) {
         this.username = username;
     }
     public String getDevice_token_for_pushes() {
-        return device_token_for_pushes;
+        return pref.getString(KEY_TOKEN_ID, device_token_for_pushes);
     }
     public void setDevice_token_for_pushes(String device_token_for_pushes) {
         this.device_token_for_pushes = device_token_for_pushes;
@@ -86,13 +86,13 @@ public class CLSS_USUARIO {
         pref = this.context.getSharedPreferences(KEY_TOKEN_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
+
     public void  crear_sesion(){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_LOGIN, this.username);
         editor.putString(KEY_TOKEN_ID, this.session);
         editor.putString(KEY_TOKEN_NAME, this.device_token_for_pushes);
         editor.commit();
-        System.out.println("creada la sesion "+ this.username);
     }
     public HashMap<String, String> getAutentificacion(){
         HashMap<String, String> user = new HashMap<String, String>();
@@ -107,13 +107,11 @@ public class CLSS_USUARIO {
     }
     public void revisar_session(String Ventana){
         if(!this.Iniciado() && Ventana.equals("INICIO")){
-            System.out.println("esta inicio");
             Intent i = new Intent(this.context, AT_LOGIN.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(i);
         }else if (this.Iniciado() && Ventana.equals("LOGIN")){
-            System.out.println("esta login");
             Intent i = new Intent(this.context, AT_LISTA_COMENTARIOS.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

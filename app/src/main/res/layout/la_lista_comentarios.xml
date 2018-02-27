@@ -6,7 +6,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorSwitchThumbNormal"
     android:orientation="vertical"
     tools:context="yrj.khoro.ACTIVITY.AT_LISTA_COMENTARIOS">
 

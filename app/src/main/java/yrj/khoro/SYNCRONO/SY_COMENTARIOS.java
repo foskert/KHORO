@@ -1,11 +1,8 @@
 package yrj.khoro.SYNCRONO;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,46 +14,57 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import yrj.khoro.ACTIVITY.AT_LISTA_COMENTARIOS;
-import yrj.khoro.ACTIVITY.AT_LOGIN;
-import yrj.khoro.CLASS.CLSS_USUARIO;
-
+import yrj.khoro.CLASS.CLSS_COMENTARIO;
 /**
- * Created by foskert@gmail.com on 24-02-2018.
+ * Created by yrj on 27-02-2018.
  */
 
-public class SY_LOGIN  extends AsyncTask<String, Void, Void> {
-
+public class SY_COMENTARIOS extends AsyncTask<String, Void, Void> {
     private final Context context;
+    private String key;
     private String username;
-    private String password;
 
-    public SY_LOGIN(Context context, String username, String password) {
+    public SY_COMENTARIOS( Context context, String key, String username) {
         this.context = context;
-        this.username = username;
-        this.password = password;
+        this.key=key;
+        this.username=username;
     }
 
     @Override
-    protected Void doInBackground(String... params) {
-        String URLConexion = "http://104.131.2.197/login?username=" + this.username + "&password=" + this.password;
+    protected Void doInBackground(String... strings) {
+        String URLConexion = "http://104.131.2.197/getNewsfeed?sid=" + this.key+"&username="+this.username ;
         String inputLine;
+
         try {
             URL url = new URL(URLConexion);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            System.out.println("Conexion "+urlConnection.getResponseCode());
             urlConnection.setRequestMethod("GET");
             urlConnection.setReadTimeout(16000);
             urlConnection.setConnectTimeout(16000);
             urlConnection.connect();
+
             InputStreamReader streamReader = new InputStreamReader(urlConnection.getInputStream());
             BufferedReader reader = new BufferedReader(streamReader);
             if ((inputLine = reader.readLine()) != null) {
-                System.out.println(inputLine);
                 final JSONObject obj = new JSONObject(inputLine);
                 if(obj.length()>0){
-                    CLSS_USUARIO User= new CLSS_USUARIO(this.context, obj.getString("username").toString(), obj.getString("device_token_for_pushes").toString(), obj.getInt("followers"), obj.getInt("followings"), obj.getString("session") );
-                    User.crear_sesion();
-                    User.revisar_session("LOGIN");
+                    for(int i=0; i<obj.length();i++ ){
+                        new CLSS_COMENTARIO(this.context,
+                                  obj.getString("_id").toString(),
+                                  obj.getString("user_id").toString(),
+                                  obj.getString("username").toString(),
+                                  obj.getString("content").toString(),
+                                  obj.getString("timestamp").toString(),
+                                  obj.getInt("commentscount"),
+                                  obj.getInt("likes"),
+                                  obj.getInt("deleted"),
+                                  obj.getString("photo").toString(),
+                                  obj.getString("liked").toString(),
+                                  obj.getString("comments").toString())
+                          .guardar();
+
+                    }
                 }
             }
             reader.close();
@@ -73,3 +81,4 @@ public class SY_LOGIN  extends AsyncTask<String, Void, Void> {
         return null;
     }
 }
+

@@ -14,7 +14,6 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
     public CLSS_QUERY(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(sql_tabla_comentarios);
