@@ -59,7 +59,7 @@
             android:backgroundTint="@color/colorAccent"
             android:drawableLeft="@drawable/icokey"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:textColor="@color/colorBlanco"/>
 
         <LinearLayout
@@ -111,7 +111,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="Login with Facebook"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
             android:textColor="@color/colorBlanco"
             android:textSize="12sp"/>
 
