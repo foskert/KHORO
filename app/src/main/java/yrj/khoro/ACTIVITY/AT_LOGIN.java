@@ -41,6 +41,7 @@ public class AT_LOGIN extends Activity {
         context=this;
     }
     public void inicializar_eventos(){
+
         btn_iniciar_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +54,19 @@ public class AT_LOGIN extends Activity {
     private boolean autentificar(){
         if(!this.edit_usuario_login.getText().toString().trim().equals("") && !this.edit_clave_login.getText().toString().trim().equals("") ){
             new SY_LOGIN(getApplicationContext(), this.edit_usuario_login.getText().toString(), this.edit_clave_login.getText().toString() ).execute();
+
         }
         return false;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inicializar_componentes();
     }
 }

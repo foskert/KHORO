@@ -1,8 +1,11 @@
 package yrj.khoro.CLASS;
 
-import android.content.Context;
 
-import java.lang.reflect.Array;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import static yrj.khoro.ADAPTER.ADP_COMENTARIO.context;
 
 /**
  * Created by yrj on 24-02-2018.
@@ -124,11 +127,11 @@ public class CLSS_COMENTARIO {
                   ", comentarios='" + comentarios + '\'' +
                   '}';
     }
-    public void guardar(){
 
-    }
-    public void consultar_all(){
-
+    public Cursor consultar_all(){
+        CLSS_QUERY IT= new CLSS_QUERY(context, "comentarios", null, 1);
+        SQLiteDatabase DB= IT.getWritableDatabase();
+        return IT.select_comentarios_all(DB);
     }
     public void consultar(String id){
 

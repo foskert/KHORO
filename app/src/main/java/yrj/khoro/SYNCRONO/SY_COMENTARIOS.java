@@ -1,8 +1,10 @@
 package yrj.khoro.SYNCRONO;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +16,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import yrj.khoro.CLASS.CLSS_COMENTARIO;
+import yrj.khoro.CLASS.CLSS_QUERY;
+
 /**
  * Created by yrj on 27-02-2018.
  */
@@ -34,7 +37,6 @@ public class SY_COMENTARIOS extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... strings) {
         String URLConexion = "http://104.131.2.197/getNewsfeed?sid=" + this.key+"&username="+this.username ;
         String inputLine;
-
         try {
             URL url = new URL(URLConexion);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -43,32 +45,31 @@ public class SY_COMENTARIOS extends AsyncTask<String, Void, Void> {
             urlConnection.setReadTimeout(16000);
             urlConnection.setConnectTimeout(16000);
             urlConnection.connect();
-
-            InputStreamReader streamReader = new InputStreamReader(urlConnection.getInputStream());
-            BufferedReader reader = new BufferedReader(streamReader);
-            if ((inputLine = reader.readLine()) != null) {
-                final JSONObject obj = new JSONObject(inputLine);
-                if(obj.length()>0){
-                    for(int i=0; i<obj.length();i++ ){
-                        new CLSS_COMENTARIO(this.context,
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            if ((inputLine = in.readLine()) != null) {
+                System.out.println(inputLine);
+                JSONArray jsonArray = new JSONArray(inputLine);
+                for(int i=0; i<jsonArray.length();i++){
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    CLSS_QUERY IT= new CLSS_QUERY(context, "comentarios", null, 1);
+                    SQLiteDatabase DB= IT.getWritableDatabase();
+                    if(DB!=null){
+                        IT.insert_comentarios( DB,
                                   obj.getString("_id").toString(),
                                   obj.getString("user_id").toString(),
                                   obj.getString("username").toString(),
                                   obj.getString("content").toString(),
                                   obj.getString("timestamp").toString(),
-                                  obj.getInt("commentscount"),
-                                  obj.getInt("likes"),
-                                  obj.getInt("deleted"),
-                                  obj.getString("photo").toString(),
+                                  obj.getString("commentscount").toString(),
+                                  obj.getString("likes").toString(),
+                                  obj.getString("deleted").toString(),
+                                  "",
                                   obj.getString("liked").toString(),
-                                  obj.getString("comments").toString())
-                          .guardar();
-
+                                  obj.getString("comments").toString());
                     }
                 }
             }
-            reader.close();
-            streamReader.close();
+            in.close();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {

@@ -1,11 +1,8 @@
 package yrj.khoro.SYNCRONO;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,8 +14,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import yrj.khoro.ACTIVITY.AT_LISTA_COMENTARIOS;
-import yrj.khoro.ACTIVITY.AT_LOGIN;
 import yrj.khoro.CLASS.CLSS_USUARIO;
 
 /**
@@ -51,7 +46,6 @@ public class SY_LOGIN  extends AsyncTask<String, Void, Void> {
             InputStreamReader streamReader = new InputStreamReader(urlConnection.getInputStream());
             BufferedReader reader = new BufferedReader(streamReader);
             if ((inputLine = reader.readLine()) != null) {
-                System.out.println(inputLine);
                 final JSONObject obj = new JSONObject(inputLine);
                 if(obj.length()>0){
                     CLSS_USUARIO User= new CLSS_USUARIO(this.context, obj.getString("username").toString(), obj.getString("device_token_for_pushes").toString(), obj.getInt("followers"), obj.getInt("followings"), obj.getString("session") );

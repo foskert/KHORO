@@ -20,9 +20,10 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL(sql_tabla_comentarios);
     }
     public void insert_comentarios(SQLiteDatabase sqLiteDatabase, String ID ,  String ID_USER , String  NOMBRE, String CONTENT , String MARCA, String COMENTARIOCOUNT , String LIKE , String ELIMINADO , String FOTO ,  String GUSTADO ,String  COMENTARIO ) {
+        System.out.println("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
         sqLiteDatabase.execSQL("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
     }
     public Cursor select_comentarios_all(SQLiteDatabase sqLiteDatabase){
@@ -34,8 +35,8 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
     public  void update_like(SQLiteDatabase sqLiteDatabase, String Clave, String like){
             sqLiteDatabase.execSQL("UPDATE comentarios SET LIKE="+like+" WHERE ID="+Clave );
      }
-    public void delete_comentarios(SQLiteDatabase sqLiteDatabase, String Clave){
-        sqLiteDatabase.execSQL("DELETE FROM  comentarios WHERE ID='"+Clave+"' ");
+    public void delete_comentarios(SQLiteDatabase sqLiteDatabase){
+        sqLiteDatabase.execSQL("DELETE FROM  comentarios");
     }
 
 }
