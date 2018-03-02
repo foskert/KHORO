@@ -44,7 +44,6 @@ public class CLSS_COMENTARIO {
         this.gustado = gustado;
         this.comentarios = comentarios;
         this.contx=con;
-        fragmentarFecha();
     }
     public String getId() {
         return id;
@@ -194,16 +193,6 @@ public class CLSS_COMENTARIO {
         SQLiteDatabase DB= COMENTARIO.getWritableDatabase();
         like++;
         COMENTARIO.update_like(DB, id, String.valueOf(like));
-    }
-    public void fragmentarFecha() {
-       /* String[] parts = this.marca.toString().split(",");
-        this.Anio= parts[1];
-        this.mes= parts[2];
-        this.dia= parts[3];
-        this.seg= parts[4];
-        this.mig= parts[5];
-        this.nag= parts[6];*/
-
     }
 
 }

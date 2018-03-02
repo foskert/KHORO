@@ -40,14 +40,12 @@ public class SY_COMENTARIOS extends AsyncTask<String, Void, Void> {
         try {
             URL url = new URL(URLConexion);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            System.out.println("Conexion "+urlConnection.getResponseCode());
             urlConnection.setRequestMethod("GET");
             urlConnection.setReadTimeout(16000);
             urlConnection.setConnectTimeout(16000);
             urlConnection.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             if ((inputLine = in.readLine()) != null) {
-                System.out.println(inputLine);
                 JSONArray jsonArray = new JSONArray(inputLine);
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject obj = jsonArray.getJSONObject(i);

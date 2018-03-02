@@ -23,7 +23,9 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql_tabla_comentarios);
     }
     public void insert_comentarios(SQLiteDatabase sqLiteDatabase, String ID ,  String ID_USER , String  NOMBRE, String CONTENT , String MARCA, String COMENTARIOCOUNT , String LIKE , String ELIMINADO , String FOTO ,  String GUSTADO ,String  COMENTARIO ) {
-        sqLiteDatabase.execSQL("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
+        Cursor c=select_comentarios(sqLiteDatabase, ID);if(c.getCount()==0){
+            sqLiteDatabase.execSQL("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
+        }
     }
     public Cursor select_comentarios_all(SQLiteDatabase sqLiteDatabase){
         return sqLiteDatabase.rawQuery("SELECT ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO FROM comentarios ", null);
@@ -32,8 +34,6 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO FROM comentarios WHERE  ID='"+Clave+"' ", null);
     }
     public  void update_like(SQLiteDatabase sqLiteDatabase, String ID, String LIKE){
-        //sqLiteDatabase.execSQL("DELETE FROM  comentarios");
-        System.out.println("UPDATE comentarios SET LIKE='"+LIKE+"'  WHERE ID='"+ID+"' ");
         sqLiteDatabase.execSQL("UPDATE comentarios SET LIKE='"+LIKE+"'  WHERE ID='"+ID+"' " );
      }
     public void delete_comentarios(SQLiteDatabase sqLiteDatabase){

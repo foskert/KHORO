@@ -3,6 +3,7 @@ package yrj.khoro.CLASS;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import java.util.HashMap;
 
 import yrj.khoro.ACTIVITY.AT_LISTA_COMENTARIOS;
@@ -116,8 +117,6 @@ public class CLSS_USUARIO {
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(i);
-        }else{
-            System.out.println("error login");
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -22,7 +23,8 @@ import yrj.khoro.SYNCRONO.SY_COMENTARIOS;
 public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
     private ListView id_list_comentario;
     private SearchView mSearchView;
-    ADP_COMENTARIO adapter;
+    static   ADP_COMENTARIO adapter;
+    static Boolean sincronizado=false;
     ArrayList<CLSS_COMENTARIO> arrayLista = new ArrayList<CLSS_COMENTARIO>();
 
     @Override
@@ -32,6 +34,14 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
         new SY_COMENTARIOS(this, US.getDevice_token_for_pushes(), US.getUsername()).execute();
         setContentView(R.layout.la_lista_anuncio);
         inicializar_componentes();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(!sincronizado){
+                    inicializar_componentes();
+                }
+            }
+        },1000);
     }
     @Override
     public void onBackPressed() {
@@ -45,8 +55,6 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
 
     public  void inicializar_componentes() {
         id_list_comentario = (ListView) findViewById(R.id.id_list_comentario);
-
-
         CLSS_QUERY CO= new CLSS_QUERY(this, "comentarios", null, 1);
         SQLiteDatabase DB= CO.getWritableDatabase();
         if (DB != null) {
@@ -70,14 +78,14 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
                                   cursor.getString(10));
                         arrayLista.add(COM);
                     } while (cursor.moveToNext());
-                    System.out.println("p10 tamaño "+arrayLista.size());
                     adapter = new ADP_COMENTARIO(this, arrayLista);
-                    System.out.println("iten ya listos "+adapter.getCount());
-                    System.out.println("strin del adptador "+adapter.getItem(0).toString());
                     id_list_comentario.setAdapter(adapter);
+                    //adapter.notifyDataSetChanged();
+                    sincronizado=true;
                 }
             }
         }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,10 +95,6 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
         //mSearchView.setQueryHint("Search...");
 
         return true;
-    }
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
     public void configureFolderSearchView(){
         mSearchView.setOnQueryTextListener( new SearchView.OnQueryTextListener(){

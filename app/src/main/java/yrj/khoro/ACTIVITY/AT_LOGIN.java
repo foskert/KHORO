@@ -46,15 +46,18 @@ public class AT_LOGIN extends Activity {
             @Override
             public void onClick(View view) {
                 if(!autentificar()){
-                    Toast.makeText(getApplicationContext(), "Invalid User or Password  " , Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Invalid User or Password  " , Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
     private boolean autentificar(){
         if(!this.edit_usuario_login.getText().toString().trim().equals("") && !this.edit_clave_login.getText().toString().trim().equals("") ){
-            new SY_LOGIN(getApplicationContext(), this.edit_usuario_login.getText().toString(), this.edit_clave_login.getText().toString() ).execute();
-
+            SY_LOGIN sincronizar_login= new SY_LOGIN(this, this.edit_usuario_login.getText().toString(), this.edit_clave_login.getText().toString(), checkBox_recuerdo_clave_login.isChecked());
+            sincronizar_login.execute();
+            return sincronizar_login.getSincronizado();
+        }else{
+            Toast.makeText(getApplicationContext(), "Invalid User or Password  " , Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -63,7 +66,6 @@ public class AT_LOGIN extends Activity {
         super.onBackPressed();
         finish();
     }
-
     @Override
     protected void onResume() {
         super.onResume();

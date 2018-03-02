@@ -2,6 +2,7 @@ package yrj.khoro.SYNCRONO;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +26,22 @@ public class SY_LOGIN  extends AsyncTask<String, Void, Void> {
     private final Context context;
     private String username;
     private String password;
+    private Boolean sincronizado=false;
+    private Boolean check;
 
-    public SY_LOGIN(Context context, String username, String password) {
+    public SY_LOGIN(Context context, String username, String password, Boolean check) {
         this.context = context;
         this.username = username;
         this.password = password;
+        this.check =this.check;
+    }
+
+    public Boolean getSincronizado() {
+        return sincronizado;
+    }
+
+    public void setSincronizado(Boolean sincronizado) {
+        this.sincronizado = sincronizado;
     }
 
     @Override
@@ -49,9 +61,17 @@ public class SY_LOGIN  extends AsyncTask<String, Void, Void> {
                 final JSONObject obj = new JSONObject(inputLine);
                 if(obj.length()>0){
                     CLSS_USUARIO User= new CLSS_USUARIO(this.context, obj.getString("username").toString(), obj.getString("device_token_for_pushes").toString(), obj.getInt("followers"), obj.getInt("followings"), obj.getString("session") );
-                    User.crear_sesion();
-                    User.revisar_session("LOGIN");
+                    this.check=true;
+                    if(this.check){
+                        User.crear_sesion();
+                        this.sincronizado=true;
+                        User.revisar_session("LOGIN");
+                    }
+                }else{
+                    Toast.makeText(context, "Invalid User or Password  " , Toast.LENGTH_LONG).show();
                 }
+            }else{
+                Toast.makeText(context, "Invalid User or Password  " , Toast.LENGTH_LONG).show();
             }
             reader.close();
             streamReader.close();
