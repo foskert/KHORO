@@ -17,11 +17,15 @@ import yrj.khoro.SYNCRONO.SY_COMENTARIOS;
 
 public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
     private ListView id_list_comentario;
+    ADP_COMENTARIO adapter;
+    ArrayList<CLSS_COMENTARIO> arrayLista = new ArrayList<CLSS_COMENTARIO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.la_lista_comentarios);
+        CLSS_USUARIO US=new CLSS_USUARIO(getApplicationContext());
+        new SY_COMENTARIOS(this, US.getDevice_token_for_pushes(), US.getUsername()).execute();
+        setContentView(R.layout.la_lista_anuncio);
         inicializar_componentes();
     }
     @Override
@@ -31,31 +35,35 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
     }
     public  void inicializar_componentes() {
         id_list_comentario = (ListView) findViewById(R.id.id_list_comentario);
-        CLSS_USUARIO US=new CLSS_USUARIO(getApplicationContext());
-        new SY_COMENTARIOS(this, US.getDevice_token_for_pushes(), US.getUsername()  ).execute();
-        System.out.println("p1");
-        ADP_COMENTARIO adapter;
-        System.out.println("p2");
-        ArrayList<CLSS_COMENTARIO> arrayLista = new ArrayList<CLSS_COMENTARIO>();
-        System.out.println("p3");
+
+
         CLSS_QUERY CO= new CLSS_QUERY(this, "comentarios", null, 1);
-        System.out.println("p4");
         SQLiteDatabase DB= CO.getWritableDatabase();
-        System.out.println("p5");
         if (DB != null) {
-            System.out.println("p6");
             Cursor cursor=CO.select_comentarios_all(DB);
-            System.out.println("p7");
             if(cursor.getCount()>0){
-                System.out.println("p8");
                 if (cursor.moveToFirst()) {
-                    System.out.println("p9");
+                    arrayLista.clear();
                     do {
-                        System.out.println("lista para imprimir "+cursor.getString(0));
-                        CLSS_COMENTARIO COM = new CLSS_COMENTARIO(getApplicationContext(), cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), Integer.parseInt(cursor.getString(5)), Integer.parseInt(cursor.getString(6)), Integer.parseInt(cursor.getString(7)),cursor.getString(8), cursor.getString(9), cursor.getString(10));
+                         CLSS_COMENTARIO COM = new CLSS_COMENTARIO(
+                                  this,
+                                  cursor.getString(0),
+                                  cursor.getString(1),
+                                  cursor.getString(2),
+                                  cursor.getString(3),
+                                   cursor.getString(4),
+                                  cursor.getInt(5),
+                                  cursor.getInt(6),
+                                  cursor.getInt(7),
+                                   cursor.getString(8),
+                                  cursor.getString(9),
+                                  cursor.getString(10));
                         arrayLista.add(COM);
                     } while (cursor.moveToNext());
+                    System.out.println("p10 tamaño "+arrayLista.size());
                     adapter = new ADP_COMENTARIO(this, arrayLista);
+                    System.out.println("iten ya listos "+adapter.getCount());
+                    System.out.println("strin del adptador "+adapter.getItem(0).toString());
                     id_list_comentario.setAdapter(adapter);
                 }
             }

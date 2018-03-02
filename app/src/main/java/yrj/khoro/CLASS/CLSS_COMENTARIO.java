@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static yrj.khoro.ADAPTER.ADP_COMENTARIO.context;
+
 
 /**
  * Created by yrj on 24-02-2018.
@@ -118,7 +118,7 @@ public class CLSS_COMENTARIO {
                   ", user_id='" + user_id + '\'' +
                   ", nombre='" + nombre + '\'' +
                   ", content='" + content + '\'' +
-                  ", marca=" + marca +
+                  ", marca='" + marca + '\'' +
                   ", comentariosCount=" + comentariosCount +
                   ", like=" + like +
                   ", eliminados=" + eliminados +
@@ -129,7 +129,7 @@ public class CLSS_COMENTARIO {
     }
 
     public Cursor consultar_all(){
-        CLSS_QUERY IT= new CLSS_QUERY(context, "comentarios", null, 1);
+        CLSS_QUERY IT= new CLSS_QUERY(contx, "comentarios", null, 1);
         SQLiteDatabase DB= IT.getWritableDatabase();
         return IT.select_comentarios_all(DB);
     }

@@ -23,7 +23,6 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql_tabla_comentarios);
     }
     public void insert_comentarios(SQLiteDatabase sqLiteDatabase, String ID ,  String ID_USER , String  NOMBRE, String CONTENT , String MARCA, String COMENTARIOCOUNT , String LIKE , String ELIMINADO , String FOTO ,  String GUSTADO ,String  COMENTARIO ) {
-        System.out.println("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
         sqLiteDatabase.execSQL("INSERT INTO comentarios (ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO) VALUES('"+ID+"', '"+ID_USER+"', '"+NOMBRE+"', '"+CONTENT+"', '"+MARCA+"', '"+COMENTARIOCOUNT+"', '"+LIKE+"', '"+ELIMINADO+"', '"+FOTO+"', '"+GUSTADO+"', '"+COMENTARIO+"' )");
     }
     public Cursor select_comentarios_all(SQLiteDatabase sqLiteDatabase){

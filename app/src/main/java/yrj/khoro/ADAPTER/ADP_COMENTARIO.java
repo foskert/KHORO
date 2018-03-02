@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import yrj.khoro.R;
  */
 
 public class ADP_COMENTARIO extends BaseAdapter {
-    public static Context context;
+    public  static Context context;
     LayoutInflater inflater;
     private List<CLSS_COMENTARIO> Lista = null;
     private ArrayList<CLSS_COMENTARIO> array;
@@ -79,13 +80,47 @@ public class ADP_COMENTARIO extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        view.setOnClickListener(new View.OnClickListener() {
+        holder.id_text_username.setText(Lista.get(i).getNombre());
+        holder.id_text_tiempo_agregado.setText("25 min");
+        holder.id_img_configuracion.setOnClickListener(new View.OnClickListener() {
             @Override
-            //llamado a la Vista de Lista de Productos
             public void onClick(View v) {
+                Toast.makeText(context, "Config  " , Toast.LENGTH_LONG).show();
             }
         });
+         holder.id_img_lc_principal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "ZOOM  " , Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.id_img_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "like  " , Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.id_text_like.setText(String.valueOf(Lista.get(i).getLike()));
+        holder.id_img_comentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Coment  " , Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.id_text_comentario.setText(String.valueOf(Lista.get(i).getComentariosCount()));
+        holder.id_img_tiempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Time  " , Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.id_text_tiempo.setText("19min");
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         return view;
     }
 }
