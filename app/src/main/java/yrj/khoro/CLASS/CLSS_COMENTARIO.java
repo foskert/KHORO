@@ -24,8 +24,14 @@ public class CLSS_COMENTARIO {
     private String gustado;
     private String comentarios;
     private Context contx;
+    private String Anio="";
+    private String mes="";
+    private String dia="";
+    private String seg="";
+    private String mig="";
+    private String nag="";
 
-    public CLSS_COMENTARIO(Context con, String id, String user_id, String nombre, String content, String marca, int comentariosCount, int like, int eliminados, String foto, String gustado,  String comentarios) {
+    public CLSS_COMENTARIO(Context con, String id, String user_id, String nombre, String content, String marca, int comentariosCount, int like, int eliminados, String foto, String gustado,  String comentarios){
         this.id = id;
         this.user_id = user_id;
         this.nombre = nombre;
@@ -38,6 +44,7 @@ public class CLSS_COMENTARIO {
         this.gustado = gustado;
         this.comentarios = comentarios;
         this.contx=con;
+        fragmentarFecha();
     }
     public String getId() {
         return id;
@@ -111,6 +118,55 @@ public class CLSS_COMENTARIO {
     public void setContx(Context contx) {
         this.contx = contx;
     }
+
+    public String getAnio() {
+        return Anio;
+    }
+
+    public void setAnio(String anio) {
+        Anio = anio;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getSeg() {
+        return seg;
+    }
+
+    public void setSeg(String seg) {
+        this.seg = seg;
+    }
+
+    public String getMig() {
+        return mig;
+    }
+
+    public void setMig(String mig) {
+        this.mig = mig;
+    }
+
+    public String getNag() {
+        return nag;
+    }
+
+    public void setNag(String nag) {
+        this.nag = nag;
+    }
+
     @Override
     public String toString() {
         return "CLSS_COMENTARIO{" +
@@ -133,13 +189,21 @@ public class CLSS_COMENTARIO {
         SQLiteDatabase DB= COMENTARIO.getWritableDatabase();
         return COMENTARIO.select_comentarios_all(DB);
     }
-    public void consultar(String id){
-
-    }
     public void like(Context con, String id, int like){
         CLSS_QUERY COMENTARIO= new CLSS_QUERY(con, "comentarios", null, 1);
         SQLiteDatabase DB= COMENTARIO.getWritableDatabase();
         like++;
         COMENTARIO.update_like(DB, id, String.valueOf(like));
     }
+    public void fragmentarFecha() {
+       /* String[] parts = this.marca.toString().split(",");
+        this.Anio= parts[1];
+        this.mes= parts[2];
+        this.dia= parts[3];
+        this.seg= parts[4];
+        this.mig= parts[5];
+        this.nag= parts[6];*/
+
+    }
+
 }

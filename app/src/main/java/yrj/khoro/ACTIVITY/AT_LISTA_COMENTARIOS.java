@@ -1,5 +1,6 @@
 package yrj.khoro.ACTIVITY;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -30,9 +31,14 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-            super.onBackPressed();
-            finish();
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
+
     public  void inicializar_componentes() {
         id_list_comentario = (ListView) findViewById(R.id.id_list_comentario);
 

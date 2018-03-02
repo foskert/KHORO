@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +42,7 @@ public class ADP_COMENTARIO extends BaseAdapter {
         TextView id_text_comentario;
         ImageView id_img_tiempo;
         TextView id_text_tiempo;
+        TextView id_text_comentarios;
     }
     @Override
     public int getCount() {
@@ -76,24 +76,26 @@ public class ADP_COMENTARIO extends BaseAdapter {
             holder.id_text_comentario = (TextView) view.findViewById(R.id.id_text_comentario);
             holder.id_img_tiempo = (ImageView) view.findViewById(R.id.id_img_tiempo);
             holder.id_text_tiempo = (TextView) view.findViewById(R.id.id_text_tiempo);
+            holder.id_text_comentarios= (TextView) view.findViewById(R.id.id_text_comentarios);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         holder.id_text_username.setText(Lista.get(i).getNombre());
-        holder.id_text_tiempo_agregado.setText("25 min");
+        //holder.id_text_tiempo_agregado.setText(Lista.get(i).getMig()+" min");
         holder.id_img_configuracion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Config  " , Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Config  " , Toast.LENGTH_LONG).show();
             }
         });
          holder.id_img_lc_principal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "ZOOM  " , Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "ZOOM  " , Toast.LENGTH_LONG).show();
             }
         });
+        holder.id_text_comentarios.setText(Lista.get(i).getContent());
         holder.id_img_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,17 +108,17 @@ public class ADP_COMENTARIO extends BaseAdapter {
         holder.id_img_comentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Coment  " , Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Coment  " , Toast.LENGTH_LONG).show();
             }
         });
         holder.id_text_comentario.setText(String.valueOf(Lista.get(i).getComentariosCount()));
         holder.id_img_tiempo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Time  " , Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Time  " , Toast.LENGTH_LONG).show();
             }
         });
-        holder.id_text_tiempo.setText("19min");
+        //holder.id_text_tiempo.setText(Lista.get(i).getMig()+" min");
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
