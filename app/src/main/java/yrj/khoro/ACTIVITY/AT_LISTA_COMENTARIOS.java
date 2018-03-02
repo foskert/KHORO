@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import yrj.khoro.SYNCRONO.SY_COMENTARIOS;
 
 public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
     private ListView id_list_comentario;
+    private SearchView mSearchView;
     ADP_COMENTARIO adapter;
     ArrayList<CLSS_COMENTARIO> arrayLista = new ArrayList<CLSS_COMENTARIO>();
 
@@ -74,5 +78,42 @@ public class AT_LISTA_COMENTARIOS extends AppCompatActivity {
                 }
             }
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.at_menu_lista_comentarios, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) searchItem.getActionView();
+        //mSearchView.setQueryHint("Search...");
+
+        return true;
+    }
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+    public void configureFolderSearchView(){
+        mSearchView.setOnQueryTextListener( new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mSearchView.onActionViewCollapsed();;
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            //configureFolderSearchView();
+            return true;
+        }else {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
