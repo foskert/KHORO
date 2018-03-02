@@ -31,8 +31,10 @@ public class CLSS_QUERY extends SQLiteOpenHelper {
     public Cursor select_comentarios(SQLiteDatabase sqLiteDatabase, String Clave){
         return sqLiteDatabase.rawQuery("SELECT ID,  ID_USER,  NOMBRE,  CONTENT, MARCA,  COMENTARIOCOUNT, LIKE, ELIMINADO, FOTO,  GUSTADO, COMENTARIO FROM comentarios WHERE  ID='"+Clave+"' ", null);
     }
-    public  void update_like(SQLiteDatabase sqLiteDatabase, String Clave, String like){
-            sqLiteDatabase.execSQL("UPDATE comentarios SET LIKE="+like+" WHERE ID="+Clave );
+    public  void update_like(SQLiteDatabase sqLiteDatabase, String ID, String LIKE){
+        //sqLiteDatabase.execSQL("DELETE FROM  comentarios");
+        System.out.println("UPDATE comentarios SET LIKE='"+LIKE+"'  WHERE ID='"+ID+"' ");
+        sqLiteDatabase.execSQL("UPDATE comentarios SET LIKE='"+LIKE+"'  WHERE ID='"+ID+"' " );
      }
     public void delete_comentarios(SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL("DELETE FROM  comentarios");

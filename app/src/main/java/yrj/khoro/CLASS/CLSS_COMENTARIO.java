@@ -129,14 +129,17 @@ public class CLSS_COMENTARIO {
     }
 
     public Cursor consultar_all(){
-        CLSS_QUERY IT= new CLSS_QUERY(contx, "comentarios", null, 1);
-        SQLiteDatabase DB= IT.getWritableDatabase();
-        return IT.select_comentarios_all(DB);
+        CLSS_QUERY COMENTARIO= new CLSS_QUERY(contx, "comentarios", null, 1);
+        SQLiteDatabase DB= COMENTARIO.getWritableDatabase();
+        return COMENTARIO.select_comentarios_all(DB);
     }
     public void consultar(String id){
 
     }
-    public void like(String id){
-
+    public void like(Context con, String id, int like){
+        CLSS_QUERY COMENTARIO= new CLSS_QUERY(con, "comentarios", null, 1);
+        SQLiteDatabase DB= COMENTARIO.getWritableDatabase();
+        like++;
+        COMENTARIO.update_like(DB, id, String.valueOf(like));
     }
 }

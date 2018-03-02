@@ -60,7 +60,7 @@ public class ADP_COMENTARIO extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
@@ -97,7 +97,9 @@ public class ADP_COMENTARIO extends BaseAdapter {
         holder.id_img_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "like  " , Toast.LENGTH_LONG).show();
+                Lista.get(i).like(context, Lista.get(i).getId().toString(), Lista.get(i).getLike());
+                Lista.get(i).setLike(Lista.get(i).getLike()+1);
+                notifyDataSetChanged();
             }
         });
         holder.id_text_like.setText(String.valueOf(Lista.get(i).getLike()));
